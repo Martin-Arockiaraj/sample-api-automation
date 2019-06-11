@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'org.gradle.sample-api-test'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useTestNG()
+    scanForTestClasses = false
+    include '**/*'
+
+    beforeTest { descriptor ->
+        logger.lifecycle("Gradle running test: ${descriptor}")
+    }
+}
+
+dependencies {
+    compile group: 'org.testng', name: 'testng', version: '6.9.10'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    compile "org.glassfish.jersey.core:jersey-client:2.18"
+    compile "commons-io:commons-io:2.4"
+    compile "org.slf4j:slf4j-api:1.7.5"
+}
